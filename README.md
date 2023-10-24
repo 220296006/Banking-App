@@ -1,6 +1,6 @@
 # Banking Application
 
-![Alt text](<Fast Money-1.png>)
+![Alt text](<Fast Money.png>)
 
 ## Table of Contents
 
