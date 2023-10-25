@@ -6,7 +6,7 @@
     <title>Login</title>
 </head>
 <body>
-    <section class="gradient-form">
+    <section class="gradient-form" [formGroup]="loginForm">
         <div class="container py-5">
             <div class="card rounded-3 text-black">
                 <div class="card-header">
@@ -15,17 +15,17 @@
                 <div class="card-body">
                     <form>
                         <div class="mb-4">
-                            <label class="form-label" for="form2Example11">Username</label>
-                            <input type="email" id="form2Example11" class="form-control"
-                                placeholder="Enter your username" />
+                            <label class="form-label" for="form2Example11" >Username</label>
+                            <input type="email" id="username" class="form-control"
+                                placeholder="Enter your username" formControlName="username"/>
                         </div>
                         <div class="mb-4">
                             <label class="form-label" for="form2Example22">Password</label>
-                            <input type="password" id="form2Example22" class="form-control" 
-                            placeholder="Enter your password"/>
+                            <input type="password"  id="typePasswordX" class="form-control" 
+                            placeholder="Enter your password"  formControlName="password"/>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-login btn-block" type="button">Log in</button>
+                            <button class="btn btn-login btn-block" routerLink="/home" type="button" (click)="onLogin()">Log in</button>
                         </div>
                     </form>
                     <div class="text-center mt-3">
