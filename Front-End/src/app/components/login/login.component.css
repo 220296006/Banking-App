@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, #eeeded, #eeeded);
+}
+.container {
+    max-width: 500px;
+}
+.card {
+    width: 100%;
+    border: none;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+.card-header img {
+    width: 100px;
+    height: auto;
+}
+.card-header h2 {
+    font-size: 24px;
+    margin-top: 10px;
+}
+.card-body {
+    padding: 20px;
+}
+.form-label {
+    font-weight: bold;
+}
+.btn-login {
+    background-color: #3498db;
+    color: #fff;
+    padding: 12px;
+    border: none;
+}
