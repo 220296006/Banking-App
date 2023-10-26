@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment</title>
+</head>
+<body>
+    <section class="gradient-form">
+        <div class="container py-5">
+            <div class="card rounded-3 text-black">
+                <div class="card-header">
+                    <img src="/assets/Investment.png" alt="Investment">
+                    <h2>Investment Calculator</h2>
+                    <p>Plan your investments wisely.</p>
+                </div>
+                <div class="card-body">
+                    <!-- Investment calculator content goes here -->
+                    <!-- For example: -->
+                    <h3>Calculate Your Investments</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label class="form-label" for="investmentAmount">Investment Amount</label>
+                            <input type="number" id="investmentAmount" class="form-control" placeholder="Enter the amount" />
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="interestRate">Annual Interest Rate</label>
+                            <input type="number" id="interestRate" class="form-control" placeholder="Enter the interest rate" />
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-login" (click)="calculateInvestment()">Calculate</button>
+                        </div>
+                    </form>
+                    <!-- End of Investment calculator content -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>
