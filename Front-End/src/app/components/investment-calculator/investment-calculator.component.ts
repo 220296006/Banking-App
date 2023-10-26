@@ -6,7 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./investment-calculator.component.css']
 })
 export class InvestmentCalculatorComponent {
-
+  investmentAmount!: number;
+  annualInterestRate!: number;
+  years!: number;
+  investmentResult: any;
 
   calculateInvestment(){}
 }

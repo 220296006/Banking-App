@@ -1,19 +1,23 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { Login } from '../model/login';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-
+export class InvestmentService {
   constructor(private http: HttpClient) { }
 
-  onLogin(username: string, password: string): Observable<Login> {
-    const loginData = { username, password }
-    return this.http.post<Login>("http://localhost:8000/login", loginData).pipe(
-      catchError(this.handleError));
+  calculateInvestment(
+    investmentAmount: number,
+    annualInterestRate: number,
+    years: number,
+    username: string
+  ): Observable<any> {
+    const data = { investmentAmount, annualInterestRate, years, username };
+    return this.http.post<any>("http://localhost:8000/calculate-investment/", data).pipe(
+      catchError(this.handleError)
+    );
   }
 
   handleError(error: HttpErrorResponse) {

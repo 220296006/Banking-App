@@ -6,36 +6,39 @@
     <title>Investment</title>
 </head>
 <body>
-    <section class="gradient-form">
-        <div class="container py-5">
-            <div class="card rounded-3 text-black">
-                <div class="card-header">
-                    <img src="/assets/Investment.png" alt="Investment">
-                    <h2>Investment Calculator</h2>
-                    <p>Plan your investments wisely.</p>
-                </div>
-                <div class="card-body">
-                    <!-- Investment calculator content goes here -->
-                    <!-- For example: -->
-                    <h3>Calculate Your Investments</h3>
-                    <form>
-                        <div class="mb-4">
-                            <label class="form-label" for="investmentAmount">Investment Amount</label>
-                            <input type="number" id="investmentAmount" class="form-control" placeholder="Enter the amount" />
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label" for="interestRate">Annual Interest Rate</label>
-                            <input type="number" id="interestRate" class="form-control" placeholder="Enter the interest rate" />
-                        </div>
-                        <div class="text-center">
-                            <button class="btn btn-login" (click)="calculateInvestment()">Calculate</button>
-                        </div>
-                    </form>
-                    <!-- End of Investment calculator content -->
-                </div>
-            </div>
+<!-- investment-calculator.component.html -->
+<section class="gradient-form">
+    <div class="container py-5">
+      <div class="card rounded-3 text-black">
+        <div class="card-header">
+          <img src="/assets/Investment.png" alt="Investment Logo" style="width: 260px;">
         </div>
-    </section>
-    
+        <div class="card-body">
+          <h3>Investment Calculator</h3>
+          <form (ngSubmit)="calculateInvestment()">
+            <div class="mb-4">
+              <label class="form-label" for="investmentAmount">Investment Amount</label>
+              <input type="number" id="investmentAmount" class="form-control" placeholder="Enter investment amount" [(ngModel)]="investmentAmount" name="investmentAmount" required />
+            </div>
+            <div class="mb-4">
+              <label class="form-label" for="annualInterestRate">Annual Interest Rate</label>
+              <input type="number" id="annualInterestRate" class="form-control" placeholder="Enter annual interest rate" [(ngModel)]="annualInterestRate" name="annualInterestRate" required />
+            </div>
+            <div class="mb-4">
+              <label class="form-label" for="years">Number of Years</label>
+              <input type="number" id="years" class="form-control" placeholder="Enter the number of years" [(ngModel)]="years" name="years" required />
+            </div>
+            <div class="text-center">
+              <button class="btn btn-login btn-block" type="submit">Calculate</button>
+            </div>
+          </form>
+          <app-calculation-result
+          [investmentResult]="investmentResult"
+        ></app-calculation-result>
+        </div>
+      </div>
+    </div>
+  </section>
+  
 </body>
 </html>

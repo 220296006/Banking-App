@@ -1,19 +1,27 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { Login } from '../model/login';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class HomeLoanService {
+
+  private apiUrl = 'http://localhost:8000'; // Update with your API endpoint
 
   constructor(private http: HttpClient) { }
 
-  onLogin(username: string, password: string): Observable<Login> {
-    const loginData = { username, password }
-    return this.http.post<Login>("http://localhost:8000/login", loginData).pipe(
-      catchError(this.handleError));
+  calculateHomeLoan(principal: number, interestRate: number, loanTerm: number, username: string): Observable<any> {
+    // Define the data to send to the API
+    const requestData = {
+      principal,
+      interest_rate: interestRate,
+      loan_term: loanTerm,
+      username // Include the username here
+    };
+
+    // Make an HTTP POST request to the API
+    return this.http.post<any>(`${this.apiUrl}/calculate-home-loan/`, requestData);
   }
 
   handleError(error: HttpErrorResponse) {
