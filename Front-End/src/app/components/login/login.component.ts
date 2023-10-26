@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import * as alertify from 'alertifyjs';
 
+interface Login {
+  access_token: string;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,9 +16,7 @@ import * as alertify from 'alertifyjs';
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
 
-  constructor(
-    private service: LoginService,
-    private router: Router) {}
+  constructor(private service: LoginService, private router: Router) {}
 
   ngOnInit(): void {
     this.initLoginForm();
@@ -28,31 +30,32 @@ export class LoginComponent implements OnInit {
   }
 
   get username() {
-    return this.loginForm.controls['username']
+    return this.loginForm.controls['username'];
   }
 
   get password() {
-    return this.loginForm.controls['password']
+    return this.loginForm.controls['password'];
   }
 
-   //  Login a user
-   onLogin() {
+  // Login a user
+  onLogin() {
     const username = this.username.value;
     const password = this.password.value;
-
+  
     this.service.onLogin(username, password).subscribe(
       (response: any) => {
         const token = response.access_token;
         if (token) {
+          // Store the token in local storage
           localStorage.setItem('token', token);
-          alertify.success("Login Successful");
+          alertify.success('Login Successful');
           this.router.navigate(['/home']);
         } else {
-          alertify.error("Login Failed");
-          window.alert({ message: 'Login Failed' });
+          alertify.error('Login Failed');
           this.router.navigate(['/login']);
         }
       }
     );
   }
+  
 }

@@ -12,8 +12,9 @@ export class InvestmentService {
     investmentAmount: number,
     annualInterestRate: number,
     years: number,
+    username: string
   ): Observable<any> {
-    const data = { investmentAmount, annualInterestRate, years};
+    const data = { investmentAmount, annualInterestRate, years, username};
     return this.http.post<any>("http://localhost:8000/calculate-investment/", data).pipe(
       catchError(this.handleError)
     );

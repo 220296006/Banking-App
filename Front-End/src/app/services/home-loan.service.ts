@@ -1,39 +1,49 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import jwt_decode from 'jwt-decode';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { HomeLoan } from '../model/home-loan';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeLoanService {
 
-  private apiUrl = 'http://localhost:8000'; // Update with your API endpoint
+  private baseUrl = 'http://localhost:8000';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  calculateHomeLoan(principal: number, interestRate: number, loanTerm: number): Observable<any> {
-    // Define the data to send to the API
-    const requestData = {
-      principal,
-      interest_rate: interestRate,
-      loan_term: loanTerm,
-    };
+  calculateHomeLoan(homeLoanData: HomeLoan): Observable<HomeLoan> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return throwError('Token is not available');
+    }
+  
+    let username: string;
+    try {
+      username = this.decodeToken(token); // Decode the token to get the username
+    } catch (error) {
+      return throwError('Failed to decode the token');
+    }
 
-    // Make an HTTP POST request to the API
-    return this.http.post<any>(`${this.apiUrl}/calculate-home-loan/`, requestData);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .post<any>(`${this.baseUrl}/calculate-home-loan/`, { ...homeLoanData, username }, { headers })
+      .pipe(
+        map((result) => {
+          return result;
+        }),
+        catchError((error) => {
+          return throwError('Failed to calculate Home Loan.');
+        })
+      );
   }
 
-  handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
-    }
-    // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+  private decodeToken(token: string): string {
+    const decodedToken: any = jwt_decode(token);
+    return decodedToken.sub;
   }
 }

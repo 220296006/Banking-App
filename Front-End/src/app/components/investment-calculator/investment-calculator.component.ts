@@ -11,13 +11,14 @@ export class InvestmentCalculatorComponent {
   annualInterestRate!: number;
   years!: number;
   investmentResult: any;
+  username!: string;
 
   constructor(private investmentService: InvestmentService) {}
 
   calculateInvestment() {
     // Implement the calculation logic
     this.investmentService
-      .calculateInvestment(this.investmentAmount, this.annualInterestRate, this.years)
+      .calculateInvestment(this.investmentAmount, this.annualInterestRate, this.years, this.username)
       .subscribe((result) => {
         this.investmentResult = result;
       });
