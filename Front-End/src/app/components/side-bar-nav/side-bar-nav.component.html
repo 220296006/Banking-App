@@ -1,1 +1,30 @@
-<p>side-bar-nav works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Nav</title>
+</head>
+<body>
+    <aside class="sidebar" *ngIf="!isLoginPage">
+        <ul class="sidebar-list">
+            <li class="sidebar-item">
+                <a class="sidebar-link" routerLink="/home">
+                <mat-icon>home</mat-icon> Home</a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" routerLink="/home-loan">
+                  <mat-icon>account_balance</mat-icon> Home Loan Calculator</a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" routerLink="/investment">
+                <mat-icon>account_balance_wallet</mat-icon> Investment Calculator</a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" routerLink="/log-out">
+                    <mat-icon>logout</mat-icon>  Logout</a>
+            </li>
+        </ul>
+    </aside>    
+</body>
+</html>

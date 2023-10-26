@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HomeLoanComponent } from './components/home-loan/home-loan.component';
 import { InvestmentCalculatorComponent } from './components/investment-calculator/investment-calculator.component';
 import { SideBarNavComponent } from './components/side-bar-nav/side-bar-nav.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SideBarNavComponent } from './components/side-bar-nav/side-bar-nav.comp
     AngularMaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
