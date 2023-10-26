@@ -46,11 +46,11 @@ export class LoginComponent implements OnInit {
         if (token) {
           localStorage.setItem('token', token);
           alertify.success("Login Successful");
-          this.router.navigate(['/booking']);
+          this.router.navigate(['/home']);
         } else {
           alertify.error("Login Failed");
           window.alert({ message: 'Login Failed' });
-          this.router.navigate(['/register']);
+          this.router.navigate(['/login']);
         }
       }
     );
