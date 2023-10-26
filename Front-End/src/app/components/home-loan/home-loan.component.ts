@@ -12,11 +12,18 @@ export class HomeLoanComponent {
   loanTerm!: number;
   homeLoanResult: any;
 
+
   constructor(private homeLoanService: HomeLoanService) {}
 
   calculateHomeLoan() {
-    // Implement the calculation logic
-
+    // Ensure that 'username' is assigned a value before making the request
+  
+      this.homeLoanService
+        .calculateHomeLoan(this.principal, this.interestRate, this.loanTerm)
+        .subscribe((result) => {
+          this.homeLoanResult = result;
+        })
+    }
   }
-}
+
 

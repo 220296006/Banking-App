@@ -11,13 +11,12 @@ export class HomeLoanService {
 
   constructor(private http: HttpClient) { }
 
-  calculateHomeLoan(principal: number, interestRate: number, loanTerm: number, username: string): Observable<any> {
+  calculateHomeLoan(principal: number, interestRate: number, loanTerm: number): Observable<any> {
     // Define the data to send to the API
     const requestData = {
       principal,
       interest_rate: interestRate,
       loan_term: loanTerm,
-      username // Include the username here
     };
 
     // Make an HTTP POST request to the API

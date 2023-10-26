@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { InvestmentService } from 'src/app/services/investment.service';
 
 @Component({
   selector: 'app-investment-calculator',
@@ -11,5 +12,14 @@ export class InvestmentCalculatorComponent {
   years!: number;
   investmentResult: any;
 
-  calculateInvestment(){}
+  constructor(private investmentService: InvestmentService) {}
+
+  calculateInvestment() {
+    // Implement the calculation logic
+    this.investmentService
+      .calculateInvestment(this.investmentAmount, this.annualInterestRate, this.years)
+      .subscribe((result) => {
+        this.investmentResult = result;
+      });
+  }
 }
