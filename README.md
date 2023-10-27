@@ -10,7 +10,7 @@
 - [Frontend](#front-end)
 - [Features](#features)
 - [API Endpoint](#api-endpoints)
--[Usage](#usage)
+- [Usage](#usage)
 - [Functional Requirements](#functional-requirements)
 - [Non-Functional Requirements](#non-functional-requirements)
 - [Conclusion](#conclusion)
@@ -140,7 +140,6 @@ Use the provided features to calculate home loans and investments.
 - GET /user/: Get user details.
 - POST /calculate-home-loan/: Calculate home loan.
 - POST /calculate-investment/: Calculate investment.
-
 
 ## Functional Requirements
 
