@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'home-loan', pathMatch: 'full', component: HomeLoanComponent},
   {path: 'investment', pathMatch: 'full', component: InvestmentCalculatorComponent},
   {path: 'side-bar-nav', pathMatch: 'full', component: SideBarNavComponent},
-
+ 
 ];
 
 @NgModule({

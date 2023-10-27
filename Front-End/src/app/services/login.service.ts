@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Login } from '../model/login';
@@ -12,8 +12,15 @@ export class LoginService {
 
   onLogin(username: string, password: string): Observable<Login> {
     const loginData = { username, password }
-    return this.http.post<Login>("http://localhost:8000/api/login", loginData).pipe(
+    return this.http.post<Login>("http://localhost:8000/login", loginData).pipe(
       catchError(this.handleError));
+  }
+
+  getUserInfo(token: string): Observable<Login> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Login>('http://localhost:8000/user', { headers }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   handleError(error: HttpErrorResponse) {

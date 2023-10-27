@@ -13,6 +13,9 @@ import { HomeLoanComponent } from './components/home-loan/home-loan.component';
 import { InvestmentCalculatorComponent } from './components/investment-calculator/investment-calculator.component';
 import { SideBarNavComponent } from './components/side-bar-nav/side-bar-nav.component';
 import { MatIconModule } from '@angular/material/icon';
+import { CalculationResultComponent } from './components/calculation-result/calculation-result.component';
+import { HomeLoanService } from './services/home-loan.service';
+import { InvestmentService } from './services/investment.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     HomeLoanComponent,
     InvestmentCalculatorComponent,
     SideBarNavComponent,
+    CalculationResultComponent,
     ],
   imports: [
     BrowserModule,
@@ -32,7 +36,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     MatIconModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, HomeLoanService, InvestmentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

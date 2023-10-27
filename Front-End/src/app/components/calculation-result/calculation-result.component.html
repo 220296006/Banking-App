@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation Result</title>
+</head>
+<body>
+   <!-- calculation-result.component.html -->
+<div class="calculation-result">
+    <div *ngIf="homeLoanResult" class="result">
+      <h4>Home Loan Calculation Result:</h4>
+      <p>Monthly Payment: {{ homeLoanResult.monthlyPayment | currency }}</p>
+      <p>Total Payment: {{ homeLoanResult.totalPayment | currency }}</p>
+      <p>Total Interest: {{ homeLoanResult.totalInterest | currency }}</p>
+    </div>
+    
+    <div *ngIf="investmentResult" class="result">
+      <h4>Investment Calculation Result:</h4>
+      <p>Future Value: {{ investmentResult.futureValue | currency }}</p>
+    </div>
+  </div>
+  
+</body>
+</html>
