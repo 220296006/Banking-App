@@ -6,6 +6,11 @@
 
 - [Introduction](#introduction)
 - [Tech Stack](#tech-stack)
+- [Backend](#back-end)
+- [Frontend](#front-end)
+- [Features](#features)
+- [API Endpoint](#api-endpoints)
+- [Usage](#usage)
 - [Functional Requirements](#functional-requirements)
 - [Non-Functional Requirements](#non-functional-requirements)
 - [Conclusion](#conclusion)
@@ -19,13 +24,122 @@ The Banking Application is a web-based banking system that allows users to perfo
 The following technologies are used in this project:'
 
 - **Frontend:**
+
   - Angular TypeScript
 
 - **Backend:**
+
   - Python (Flask or Django)
 
 - **Database:**
   - Text files for storing bank data and transaction logs
+
+## Back-End
+
+The back-end of the Banking App is developed using Python and FastAPI. It provides API endpoints for user authentication and financial calculations.
+
+### Prerequisites
+
+- Python 3.6+
+- Dependencies listed in `requirements.txt`
+- SQL database (configured in `app.py`)
+
+### Setting Up
+
+1. Clone this repository:
+
+   ```shell
+   git clone https://github.com/220296006/banking-app.git
+   cd banking-app/back-end
+
+   ```
+
+2. Create a virtual environment (optional but recommended):
+
+```python
+
+python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+
+```
+
+3. Install dependencies:
+
+```python
+
+pip install -r requirements.txt
+
+```
+
+4. Run the FastAPI application:
+
+```python
+
+uvicorn main:app --host 127.0.0.1 --port 8000
+
+```
+
+## Front-End
+
+The front-end of the Banking App is built using Angular. It provides a user interface for login and accessing financial tools.
+
+Prerequisites
+
+- Node.js
+- Angular CLI
+-
+
+### Setting Up
+
+1. Navigate to the front-end folder:
+
+```shell
+
+cd banking-app/front-end
+
+```
+
+2. Install dependencies:
+
+```shell
+
+npm install
+
+```
+
+3. Start the Angular development server:
+
+```shell
+
+ng serve
+
+```
+
+## Features
+
+- User authentication via JWT tokens.
+- Home loan calculation.
+- Investment calculation.
+- CORS middleware for cross-origin requests.
+
+## Project Structure
+
+src/app/components: Angular components.
+src/app/services: Services for making API requests.
+src/app/model: Data models.
+
+## Usage
+
+Access the front-end at <http://localhost:4200>.
+Log in using valid credentials.
+Use the provided features to calculate home loans and investments.
+
+## API Endpoints
+
+- POST /login: User login and token generation.
+- GET /user/: Get user details.
+- POST /calculate-home-loan/: Calculate home loan.
+- POST /calculate-investment/: Calculate investment.
 
 ## Functional Requirements
 
@@ -39,18 +153,22 @@ The following technologies are used in this project:'
 ## Non-Functional Requirements
 
 1. **Security:**
+
    - User data is securely stored and transmitted.
    - Implement user authentication and authorization.
    - Protect against common web vulnerabilities.
 
 2. **Responsive Design:**
+
    - The application should be responsive and work on various devices and screen sizes.
 
 3. **Performance:**
+
    - Optimize the application for efficient rendering and minimal loading times.
    - Implement appropriate caching strategies.
 
 4. **User Experience:**
+
    - Create a user-friendly and intuitive user interface.
    - Implement accessibility features for users with disabilities.
 
