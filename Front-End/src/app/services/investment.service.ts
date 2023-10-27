@@ -1,36 +1,55 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+// investment.service.ts
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import jwt_decode from 'jwt-decode';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { Investment } from '../model/investment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvestmentService {
-  constructor(private http: HttpClient) { }
+  private baseUrl = 'http://localhost:8000';
 
-  calculateInvestment(
-    investmentAmount: number,
-    annualInterestRate: number,
-    years: number,
-    username: string
-  ): Observable<any> {
-    const data = { investmentAmount, annualInterestRate, years, username};
-    return this.http.post<any>("http://localhost:8000/calculate-investment/", data).pipe(
-      catchError(this.handleError)
-    );
+  constructor(private http: HttpClient) {}
+
+  calculateInvestment(investmentData: Investment, username: string): Observable<Investment> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return throwError('Token is not available');
+    }
+
+    try {
+      username = this.decodeToken(token); // Decode the token to get the username
+    } catch (error) {
+      return throwError('Failed to decode the token');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .post<any>(`${this.baseUrl}/calculate-investment/`, { ...investmentData, username }, { headers })
+      .pipe(
+        map((result) => {
+          return result;
+        }),
+        catchError((error) => {
+          return throwError('Failed to calculate Investment.');
+        })
+      );
   }
 
-  handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
+  private decodeToken(token: string): string {
+    try {
+      const decodedToken: any = jwt_decode(token);
+      console.log('Decoded Token:', decodedToken); // Log the decoded token
+      return decodedToken.sub;
+    } catch (error) {
+      console.error('Failed to decode the token:', error);
+      return '';
     }
-    // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }

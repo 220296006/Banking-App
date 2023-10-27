@@ -13,13 +13,12 @@ export class HomeLoanService {
 
   constructor(private http: HttpClient) {}
 
-  calculateHomeLoan(homeLoanData: HomeLoan): Observable<HomeLoan> {
+  calculateHomeLoan(homeLoanData: HomeLoan, username: string): Observable<HomeLoan> {
     const token = localStorage.getItem('token');
     if (!token) {
       return throwError('Token is not available');
     }
   
-    let username: string;
     try {
       username = this.decodeToken(token); // Decode the token to get the username
     } catch (error) {
@@ -43,7 +42,14 @@ export class HomeLoanService {
   }
 
   private decodeToken(token: string): string {
-    const decodedToken: any = jwt_decode(token);
-    return decodedToken.sub;
+    try {
+      const decodedToken: any = jwt_decode(token);
+      console.log('Decoded Token:', decodedToken); // Log the decoded token
+      return decodedToken.sub;
+    } catch (error) {
+      console.error('Failed to decode the token:', error);
+      return ''; // Return null or a default value in case of an error
+    }
   }
+  
 }
