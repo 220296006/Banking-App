@@ -4,9 +4,6 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import * as alertify from 'alertifyjs';
 
-interface Login {
-  access_token: string;
-}
 
 @Component({
   selector: 'app-login',
@@ -46,7 +43,6 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         const token = response.access_token;
         if (token) {
-          // Store the token in local storage
           localStorage.setItem('token', token);
           alertify.success('Login Successful');
           this.router.navigate(['/home']);

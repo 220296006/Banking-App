@@ -1,0 +1,1 @@
+Username: Vika, Investment Result: {'future_value': 16453.089347785855}
