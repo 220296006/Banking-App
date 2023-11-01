@@ -4,8 +4,10 @@ from fastapi import FastAPI, Form, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from starlette import status
+
 import auth
 import models
+from auth import get_current_user
 from database import SessionLocal, engine
 
 # Create the FastAPI app
@@ -33,14 +35,33 @@ def get_db():
 
 
 db_dependency = Annotated[Session, Depends(get_db)]
-user_dependency = Annotated[dict, Depends(auth.get_current_user)]
+user_dependency = Annotated[dict, Depends(get_current_user)]
 
 
 @app.get("/", status_code=status.HTTP_200_OK)
-async def user(user: None):
+async def user(user: None, db: db_dependency):
     if user is None:
         raise HTTPException(status_code=401, detail='Authentication Failed')
     return {"User": user}
+
+
+class User:
+    def __init__(self, username: str, email: str):
+        self.username = username
+        self.email = email
+
+
+class HomeLoanInput:
+    def __init__(self, principal: float, interest_rate: float, years: int):
+        self.principal = principal
+        self.interest_rate = interest_rate
+        self.years = years
+
+class InvestmentInput:
+    def __init__(self, principal: float, interest_rate: float, years: int):
+        self.principal = principal
+        self.interest_rate = interest_rate
+        self.years = years
 
 
 # Function to calculate home loan
