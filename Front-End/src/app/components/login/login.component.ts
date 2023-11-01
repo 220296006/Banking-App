@@ -39,7 +39,13 @@ export class LoginComponent implements OnInit {
   onLogin() {
     const username = this.username.value;
     const password = this.password.value;
-    this.service.onLogin(username, password).subscribe(
+    
+    // Create form data and append the values
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+  
+    this.service.onLogin(formData).subscribe(
       (response: any) => {
         const token = response.access_token;
         if (token) {

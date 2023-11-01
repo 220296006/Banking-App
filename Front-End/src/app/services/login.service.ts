@@ -10,12 +10,11 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  onLogin(username: string, password: string): Observable<Login> {
-    const requestData = {username: username,  password: password };
+  onLogin(formData: FormData): Observable<Login> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.post<Login>('http://localhost:8000/auth/token', requestData, { headers }).pipe(
+    return this.http.post<Login>('http://localhost:8000/auth/token', formData, { headers }).pipe(
       catchError(this.handleError)
     );
   }
