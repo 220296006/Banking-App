@@ -5,21 +5,20 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from starlette import status
 
-import auth
+import authentication
 import models
-from auth import get_current_user
+from authentication import get_current_user
 from database import SessionLocal, engine
 
 # Create the FastAPI app
 app = FastAPI()
-app.include_router(auth.router)
+app.include_router(authentication.router)
 models.Base.metadata.create_all(bind=engine)
 
 # Configure CORS settings
-origins = ['https://localhost:4200']
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["http://localhost:4200"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

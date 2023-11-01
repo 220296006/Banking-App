@@ -11,23 +11,19 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   onLogin(username: string, password: string): Observable<Login> {
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('password', password);
-
-    // Define the headers with the correct content type
+    const requestData = {username: username,  password: password };
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-
-    return this.http.post<Login>('http://localhost:8000/login', formData, { headers }).pipe(
+    return this.http.post<Login>('http://localhost:8000/auth/token', requestData, { headers }).pipe(
       catchError(this.handleError)
     );
   }
+  
 
   getUserInfo(token: string): Observable<Login> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<Login>('http://localhost:8000/user', { headers }).pipe(
+    return this.http.get<Login>('http://localhost:8000/auth/user', { headers }).pipe(
       catchError(this.handleError)
     );
   }

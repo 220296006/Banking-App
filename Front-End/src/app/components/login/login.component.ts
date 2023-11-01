@@ -13,7 +13,8 @@ import * as alertify from 'alertifyjs';
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
 
-  constructor(private service: LoginService, private router: Router) {}
+  constructor(private service: LoginService, 
+    private router: Router) {}
 
   ngOnInit(): void {
     this.initLoginForm();
@@ -38,7 +39,6 @@ export class LoginComponent implements OnInit {
   onLogin() {
     const username = this.username.value;
     const password = this.password.value;
-  
     this.service.onLogin(username, password).subscribe(
       (response: any) => {
         const token = response.access_token;

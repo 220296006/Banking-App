@@ -7,7 +7,6 @@ import { InvestmentCalculatorComponent } from './components/investment-calculato
 import { SideBarNavComponent } from './components/side-bar-nav/side-bar-nav.component';
 
 const routes: Routes = [
-  {path: '#', pathMatch: 'full', component: HomeComponent},
   {path: 'login', pathMatch: 'full', component: LoginComponent},
   {path: 'home', pathMatch: 'full', component: HomeComponent},
   {path: 'home-loan', pathMatch: 'full', component: HomeLoanComponent},

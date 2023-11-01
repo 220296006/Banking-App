@@ -1,1 +1,0 @@
-Username: shaun, Investment Result: {'future_value': 36.685555679112156}
